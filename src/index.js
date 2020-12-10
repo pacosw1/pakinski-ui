@@ -5,7 +5,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Root from './views/root';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8000',
+  uri: 'http://localhost:8000/query',
   cache: new InMemoryCache()
 });
 

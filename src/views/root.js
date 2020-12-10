@@ -6,8 +6,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    
   } from "react-router-dom";
+import NewProduct from './product';
 
 const Root = () => {
 
@@ -17,6 +17,9 @@ const Root = () => {
             <Route path="/login"/>
             <Route path="/register"/>
             <Route path="/profile"/>
+            <Route path="/new-product">
+                <NewProduct/>
+            </Route>
             <Route path="/password-reset"/>
         </Switch>
     </Router>
