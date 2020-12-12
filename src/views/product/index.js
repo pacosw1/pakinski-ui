@@ -1,6 +1,6 @@
-import { useLazyQuery } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
-import {SEARCH_TAGS} from "./queries"
+import {SEARCH_TAGS, CREATE_PRODUCT} from "./queries"
 import React, { useEffect, useState } from 'react';
 
 import {SearchBar} from "./styles"
@@ -10,6 +10,16 @@ import {SearchBar} from "./styles"
 const NewProduct = props => {
 
     let [tags, setTags] = useState([])
+    let [fields, setFields] = useState({
+        title: "",
+        description: "",
+        price: 0.00,
+        freeStock: 1,
+        previewImage: "",
+    })
+
+    const [createProduct, { loading: saveLoading, error: saveError }] = useMutation(CREATE_PRODUCT);
+
     let [info, setInfo] = useState({
         title: "",
         price: 0.00,
@@ -22,6 +32,32 @@ const NewProduct = props => {
         getTags({variables: { keyword: e.target.value }})
     }
 
+
+    const submitProduct = () => {
+        let input = {...fields, tags, images}
+
+            createProduct({variables: { input }}).then(res => {
+                console.log(res)
+            }).catch(e => {
+                console.log(e)
+            })
+       
+    }
+
+    const onChangeField = (e) => {
+
+        let {value, name} = e.target
+
+        console.log(name)
+
+        let copy = {...fields}
+        copy[name] = value
+
+        setFields(copy)
+
+        console.log(fields)
+    }
+
     console.log(images)
 
 
@@ -32,6 +68,7 @@ const NewProduct = props => {
 
 
     //IMAGES
+
 
 
     const removeImage = (name) => {
@@ -79,12 +116,18 @@ const NewProduct = props => {
 
     return <div>
         <h1>Product Info</h1>
+        <TextInput onChange={onChangeField} name="title"/>
+        <TextInput onChange={onChangeField} name="description"/>
+        <NumberInput onChange={onChangeField} name="price"/>
+        <NumberInput onChange={onChangeField} name="freeStock"/>
         <h1>Images</h1>
         <ImageSection images={images} updateImageFiles={updateImageFiles} removeImage={removeImage}/>
         
         <h1>Tags</h1>
         {renderTags}
         <TagSection tags={tags} addTag={addTag} onSearch={onTagSearch}/>
+
+        <button onClick={() => submitProduct()}>Crear</button>
     </div>
 }
 
@@ -99,7 +142,6 @@ const NewProduct = props => {
 const ImageSection = ({images, updateImageFiles, removeImage}) => {
 
 
-    console.log(images[0])
     const renderPreview = images.map((img, key) => {
         return <Image src={URL.createObjectURL(img)} removeImage={removeImage} name={img.name} key={key} alt="preview"/>
     })
@@ -119,7 +161,14 @@ const Image = ({src, name, alt, removeImage}) => {
 
 
 
+//INPUTS
 
+const NumberInput = ({onChange, name}) => {
+    return <input placeholder={name} name={name} type="number" onChange={e => onChange(e)}/>
+}
+const TextInput = ({onChange, name}) => {
+    return <input placeholder={name} name={name} type="text" onChange={e => onChange(e)}/>
+}
 
 
 

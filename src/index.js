@@ -3,9 +3,14 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Root from './views/root';
+import { createUploadLink } from 'apollo-upload-client'
+
 
 const client = new ApolloClient({
-  uri: 'http://localhost:8000/query',
+
+  link: createUploadLink({
+    uri: "http://localhost:8000/query"
+  }),
   cache: new InMemoryCache()
 });
 

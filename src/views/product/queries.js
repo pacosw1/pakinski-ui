@@ -9,6 +9,14 @@ const SEARCH_TAGS = gql`
   }
 `;
 
+
+const CREATE_PRODUCT = gql`
+
+  mutation product($input: ProductInput!) {
+    createProduct(input: $input)
+  }
+`;
+
 const GET_CHAR_COUNT = gql`
   query {
     characters {
@@ -20,4 +28,4 @@ const GET_CHAR_COUNT = gql`
   }
 `;
 
-export { SEARCH_TAGS, GET_CHAR_COUNT };
+export { SEARCH_TAGS, GET_CHAR_COUNT, CREATE_PRODUCT };
