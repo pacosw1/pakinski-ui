@@ -36,6 +36,9 @@ const NewProduct = props => {
     const submitProduct = () => {
         let input = {...fields, tags, images}
 
+        input.price = parseFloat(input.price)
+        input.freeStock = parseInt(input.freeStock)
+
             createProduct({variables: { input }}).then(res => {
                 console.log(res)
             }).catch(e => {
@@ -203,7 +206,7 @@ const TagSection = ({tags, addTag, onSearch}) => {
 
 
     const renderTags = (data ? data: []).map(tag => {
-        return <Tag addTag={addTag} key={tag.id} id={tag.id} title={tag.name}/>
+        return <Tag addTag={addTag} key={tag.id} id={tag.id} title={tag.title}/>
     })
 
 

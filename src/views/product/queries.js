@@ -4,7 +4,7 @@ const SEARCH_TAGS = gql`
   query tags($keyword: String!) {
     searchTags(keyword: $keyword) {
       id
-      name
+      title
     }
   }
 `;
@@ -12,8 +12,10 @@ const SEARCH_TAGS = gql`
 
 const CREATE_PRODUCT = gql`
 
-  mutation product($input: ProductInput!) {
-    createProduct(input: $input)
+  mutation product($input: ProductInput) {
+    createProduct(input: $input) {
+        message
+    }
   }
 `;
 
