@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+import { CookiesProvider } from "react-cookie";
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Root from './views/root';
 import { createUploadLink } from 'apollo-upload-client'
@@ -15,9 +16,13 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
+  <CookiesProvider>
+
   <ApolloProvider client={client}>
+
     <Root />
-  </ApolloProvider>,
+  </ApolloProvider>
+  </CookiesProvider>,
   document.getElementById('root')
 );
 
