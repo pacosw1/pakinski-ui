@@ -36,6 +36,7 @@ Primary.args = {
   primary: true,
   text: "Hello World",
   fill: false,
+  height: 3,
   disabled: false,
   dark: false,
   label: 'Button'
@@ -44,6 +45,7 @@ var Secondary = MenuBtnTemplate.bind({});
 exports.Secondary = Secondary;
 Secondary.args = {
   text: "Hello World",
+  height: 3,
   fill: false,
   label: 'Button'
 }; // export const Large = Template.bind({});

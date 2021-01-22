@@ -1,4 +1,5 @@
 // export {} from "./typography"
 export {Button, MenuButton} from "./components/buttons"
 export {TextInput} from "./components/inputs"
+export {Navbar, NavContainer} from "./components/navbar"
 export {Header, Subtitle, SubHeader, Text} from "./components/typography"

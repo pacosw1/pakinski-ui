@@ -18,6 +18,7 @@ Primary.args = {
   primary: true,
   text: "Hello World",
   fill: false,
+  height: 3,
   disabled: false,
   dark: false,
   label: 'Button',
@@ -28,6 +29,8 @@ Primary.args = {
 export const Secondary = MenuBtnTemplate.bind({});
 Secondary.args = {
   text: "Hello World",
+  height: 3,
+
   fill: false,
   label: 'Button',
 };
